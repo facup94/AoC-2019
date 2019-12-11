@@ -37,6 +37,7 @@ func main() {
 
 	fmt.Println("--- DAY 9 ---")
 	day9A()
+	day9B()
 
 	// fmt.Println("--- DAY 10 ---")
 	// fmt.Println("--- DAY 11 ---")
