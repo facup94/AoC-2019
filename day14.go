@@ -99,10 +99,6 @@ func day14B() {
 
 	for !overLimit {
 		chemicals["FUEL"].Needed++
-		// fmt.Println(chemicals["FUEL"].Needed)
-		// if chemicals["FUEL"].Needed%828927 == 0 {
-		// 	fmt.Println(chemicals["FUEL"].Needed/828927, "%")
-		// }
 
 		reactionsNeeded := true
 		for reactionsNeeded {
@@ -125,9 +121,11 @@ func day14B() {
 						timesReaction++
 					}
 
+					// Output chemicals
 					o := chemicals[k]
 					o.Produced += outputChemical.Amount * timesReaction
 
+					// Input chemicals
 					for _, inputNeeded := range inputChemicals {
 						ch := chemicals[inputNeeded.Name]
 						ch.Needed += inputNeeded.Amount * timesReaction
