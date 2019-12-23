@@ -106,29 +106,6 @@ func Find(slice []string, val string) (int, bool) {
 	return -1, false
 }
 
-// Graphs
-type edge struct {
-	node   string
-	weight int
-}
-
-type graph struct {
-	nodes map[string][]edge
-}
-
-func newGraph() *graph {
-	return &graph{nodes: make(map[string][]edge)}
-}
-
-func (g *graph) addEdge(origin, destiny string, weight int) {
-	g.nodes[origin] = append(g.nodes[origin], edge{node: destiny, weight: weight})
-	g.nodes[destiny] = append(g.nodes[destiny], edge{node: origin, weight: weight})
-}
-
-func (g *graph) getEdges(node string) []edge {
-	return g.nodes[node]
-}
-
 func permutations(arr []int) [][]int {
 	result := [][]int{}
 
