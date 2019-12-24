@@ -68,7 +68,7 @@ func main() {
 	// day16B()
 
 	fmt.Println("--- DAY 17 ---")
-	// day17A()
+	day17A()
 	day17B()
 
 	// fmt.Println("--- DAY 18 ---")

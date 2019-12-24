@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-	"time"
 )
 
 func day17A() {
@@ -49,7 +48,7 @@ func day17A() {
 func day17B() {
 	entrada := strings.Split(readFile(17)[0], ",")
 
-	memory := make([]int, len(entrada)*10)
+	memory := make([]int, len(entrada)*15)
 	for index := 0; index < len(entrada); index++ {
 		memory[index], _ = strconv.Atoi(string(entrada[index]))
 	}
@@ -64,47 +63,32 @@ func day17B() {
 	// C = L10 R6 R6 L8
 
 	mainMovementRoutine := "A,B,A,B,C,A,B,C,A,C\n"
-	movementFunctionA := "R6,L10,R8\n"
-	movementFunctionB := "R8,R12,L8,L8\n"
-	movementFunctionC := "L10,R6,R6,L8\n"
-	videoFeed := "y\n"
+	movementFunctionA := "R,6,L,10,R,8\n"
+	movementFunctionB := "R,8,R,12,L,8,L,8\n"
+	movementFunctionC := "L,10,R,6,R,6,L,8\n"
+	videoFeed := "n\n"
+	allInputs := mainMovementRoutine + movementFunctionA + movementFunctionB + movementFunctionC + videoFeed
 
 	inputList := make([]int, 0)
 
-	for _, c := range mainMovementRoutine {
-		inputList = append(inputList, int(c))
-	}
-	for _, c := range movementFunctionA {
-		inputList = append(inputList, int(c))
-	}
-	for _, c := range movementFunctionB {
-		inputList = append(inputList, int(c))
-	}
-	for _, c := range movementFunctionC {
-		inputList = append(inputList, int(c))
-	}
-	for _, c := range videoFeed {
+	for _, c := range allInputs {
 		inputList = append(inputList, int(c))
 	}
 	inputList = append(inputList, 0)
 
-	fmt.Println("INPUT GIVEN:", inputList)
-
 	var PC, output, inputIndex int
 	for {
 		output, PC = runProgramDay17(memory, PC, inputList[inputIndex])
-		if output == -3 {
+		if output == -2 {
 			inputIndex++
 			continue
 		}
 		if output > 255 || output < 1 {
-			fmt.Printf("%v", output)
-		} else {
-			fmt.Printf("%c", output)
+			break
 		}
 	}
 
-	fmt.Printf("Result part 2: %v\n", "unsolved yet")
+	fmt.Printf("Result part 2: %v\n", output)
 }
 
 func runProgramDay17(memory []int, instructionPointer, input int) (int, int) {
@@ -116,7 +100,6 @@ func runProgramDay17(memory []int, instructionPointer, input int) (int, int) {
 		// halt
 		if opcode == 99 {
 			instructionPointer++
-			fmt.Println("FINALIZO POR HALT")
 			return -1, len(memory)
 		}
 
@@ -138,10 +121,8 @@ func runProgramDay17(memory []int, instructionPointer, input int) (int, int) {
 		if opcode == 3 {
 			params := getParams(memory, getModes(memory[instructionPointer]), instructionPointer, 1)
 			memory[params[0]] = input
-			fmt.Printf("READ: %c\n", input)
-			time.Sleep(500 * time.Millisecond)
 			instructionPointer += 2
-			return -3, instructionPointer
+			return -2, instructionPointer
 		}
 
 		// output value
@@ -201,7 +182,6 @@ func runProgramDay17(memory []int, instructionPointer, input int) (int, int) {
 		}
 	}
 
-	fmt.Println("FINALIZO POR LOOP")
 	return -1, -1
 }
 
