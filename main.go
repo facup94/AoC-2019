@@ -63,11 +63,14 @@ func main() {
 	// day15A()
 	// day15B()
 
-	fmt.Println("--- DAY 16 ---")
-	day16A()
-	day16B()
+	// fmt.Println("--- DAY 16 ---")
+	// day16A()
+	// day16B()
 
-	// fmt.Println("--- DAY 17 ---")
+	fmt.Println("--- DAY 17 ---")
+	// day17A()
+	day17B()
+
 	// fmt.Println("--- DAY 18 ---")
 	// fmt.Println("--- DAY 19 ---")
 	// fmt.Println("--- DAY 20 ---")
