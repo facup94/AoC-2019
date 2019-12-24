@@ -88,6 +88,8 @@ func day17B() {
 	}
 	inputList = append(inputList, 0)
 
+	fmt.Println("INPUT GIVEN:", inputList)
+
 	var PC, output, inputIndex int
 	for {
 		output, PC = runProgramDay17(memory, PC, inputList[inputIndex])
